@@ -1,8 +1,11 @@
-# Experimenting with Google Cloud Speech for long sound recordings
+# Experimenting with Cloud Speech Vendors
 
 This was a quick experiment to see how Google Cloud Speech's transcription output looks for long sound files. As input, I used a ~63 minute FLAC file of an episode from the podcast [Acquired](http://www.acquired.fm/episodes/2016/8/3/acquired-episode-17-waze) (thanks [Ben](https://twitter.com/gilbert)!).
 
 The code is a modified example from Google to run an asynchronous speech processing request. I had to call asyncRecognize because this is the only option if the audio length is greater than 1 minute. Furthermore, the format of the file must be LINEAR16 signed-integer little-endian encoded raw... see the audio format section, and resources sections below for processing tips.
+
+This script currently only supports Google Cloud Speech for long recordings (>1m), and with the stated limitations above. I may or may not modify it later to include other speech vendor examples. For a more comprehensive tool to do this, see [Speech Recognition](https://github.com/Uberi/speech_recognition).
+
 
 ## Learnings
 
@@ -15,7 +18,7 @@ The code is a modified example from Google to run an asynchronous speech process
 ## Sample Output
 
 The result for this [5 minute section](https://storage.cloud.google.com/example-content/5m-ben-podcast-waze.raw?_ga=1.96114268.1595850234.1461692478) of the podcast was:
-'''
+```
 {
   "response": {
     "@type": "type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse",
@@ -47,10 +50,10 @@ The result for this [5 minute section](https://storage.cloud.google.com/example-
     "progressPercent": 100
   }
 }
-'''
+```
 
 For the [entire hour long podcast](https://storage.cloud.google.com/example-content/ben-podcast-waze.raw?_ga=1.53665000.1595850234.1461692478) it was:
-'''
+```
 {
   "response": {
     "@type": "type.googleapis.com/google.cloud.speech.v1beta1.AsyncRecognizeResponse",
@@ -258,8 +261,7 @@ For the [entire hour long podcast](https://storage.cloud.google.com/example-cont
     "progressPercent": 100
   }
 }
-'''
-
+```
 
 
 
@@ -295,15 +297,15 @@ sox --rate 44100 --bits 16 --encoding signed-integer input/ben-podcast-waze.raw 
 
 ### Install dependencies for script
 
-'''
+```
 pip install --upgrade google-api-python-client
-'''
+```
 
 ### Run script
 
-'''
+```
 # Call script for this URL
-
+```
 
 
 
