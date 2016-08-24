@@ -1,3 +1,11 @@
+# Script to call Google Cloud Speech API asynchronously for sound files > 1m long.
+#
+# To run this script: python google_speech.py -h
+#
+# Originally inspired from: https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/speech/api/speech_async_rest.py
+# Licensed under the Apache License, Version 2.0 (the "License"): http://www.apache.org/licenses/LICENSE-2.0
+
+
 import argparse
 import base64
 import json
@@ -56,14 +64,15 @@ def fetch_job_result(name):
     service_request = service.operations().get(name=name)
 
     while True:
-        # Give the server a few seconds to process.
-        print('%s, waiting for results from job, %s' % (datetime.now().replace(second=0, microsecond=0), name))
-        time.sleep(15)
         # Get the long running operation with response.
         response = service_request.execute()
 
         if 'done' in response and response['done']:
             break
+        else:
+            # Give the server a few seconds to process.
+            print('%s, waiting for results from job, %s' % (datetime.now().replace(second=0, microsecond=0), name))
+            time.sleep(60)
 
     print(json.dumps(response))
 
