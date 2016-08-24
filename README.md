@@ -305,9 +305,12 @@ pip install --upgrade google-api-python-client
 ### Run script
 
 ```
-# Call script for this URL
-```
+# Kick off job to process file hosted on Goole Storage
+python google_speech.py -u gs://yourbucketname/yourfilename.raw
 
+# Check status of job
+python google_speech.py -n somenumber
+```
 
 
 ## Useful resources
