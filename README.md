@@ -14,6 +14,7 @@ This script currently only supports Google Cloud Speech for long recordings (>1m
 1. One possible issue is that the post-processing on the podcast audio created artifacts that led to inaccuracy. There is some indication this could be true based on their [best practices](https://cloud.google.com/speech/docs/best-practices), e.g. "All noise reduction processing should be disabled.".
 1. Another concern is that Google Cloud Speech will try to return up to 30 guesses... unclear how long each guess can be. In the output below they are short phrases, but in my tests with 20 second long phrases on their site, I see much longer sentences per guess.
   * See "maxAlternatives" deep down in their API docs here: https://cloud.google.com/speech/reference/rest/v1beta1/RecognitionConfig
+1. Based on the little I've seen here, and the fact that most of Google's Cloud Speech API is focused on <1m long recordings... my guess is that long form transcription is not really Google's goal. They want to build something that one can use to create listening bots (like Siri or Alexa), and not something like a transcription service. Please correct me if you know more and find this to be an incorrect conclusion.
 
 ## Sample Output
 
